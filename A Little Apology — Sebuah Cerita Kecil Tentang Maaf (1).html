@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>A Little Apology — Sebuah Cerita Kecil Tentang Maaf</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext y='26' font-size='26'%3E🌸%3C/text%3E%3C/svg%3E">
+<style>
+:root{--bg1:#fde8ef;--bg2:#efe6fb;--bg3:#e3f0fb;--card:#fffaf3;--ink:#4a3a4f;--soft:#7a6680;--pink:#f4a6c0;--lav:#c9b6ee;--btn:#8a4a72;--btnt:#fff;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg1:#2c2030;--bg2:#252036;--bg3:#1f2a3a;--card:#352b3d;--ink:#f6e9f0;--soft:#cdb8d6;--btn:#f4a6c0;--btnt:#3a1f33}}
+:root[data-theme="dark"]{--bg1:#2c2030;--bg2:#252036;--bg3:#1f2a3a;--card:#352b3d;--ink:#f6e9f0;--soft:#cdb8d6;--btn:#f4a6c0;--btnt:#3a1f33}
+*{box-sizing:border-box}html,body{height:100%;margin:0}
+body{background:linear-gradient(160deg,var(--bg1),var(--bg2) 55%,var(--bg3));color:var(--ink);font:17px/1.65 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;overflow-x:hidden}
+h1,h2,.poem,.quote{font-family:Georgia,"Times New Roman",serif;font-weight:500;line-height:1.35}
+h1{font-size:clamp(1.5rem,6vw,2.2rem)}h2{font-size:clamp(1.3rem,5vw,1.8rem)}
+#app{min-height:100%;display:flex;flex-direction:column;max-width:640px;margin:0 auto;padding:12px 18px 20px;position:relative;z-index:1}
+header{flex-wrap:wrap;display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:.85rem;color:var(--soft)}
+.bar{height:5px;background:rgba(150,120,170,.2);border-radius:9px;margin:6px 0 10px;overflow:hidden}.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--pink),var(--lav));transition:width .5s}
+main{flex:1;display:flex;flex-direction:column;justify-content:center;gap:16px;text-align:center;padding:12px 0}
+.scene{animation:in var(--t,.5s) ease both}
+@keyframes in{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+button{font:inherit;cursor:pointer;border:0;border-radius:999px;padding:12px 22px;min-height:46px;background:var(--btn);color:var(--btnt);transition:transform .2s,box-shadow .2s}
+button:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 6px 16px rgba(138,74,114,.25)}
+button.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--lav)}
+button:disabled{opacity:.45;cursor:not-allowed}
+button:focus-visible{outline:3px solid #6a8fe0;outline-offset:3px}
+.card{background:var(--card);border-radius:18px;padding:18px;box-shadow:0 8px 24px rgba(150,120,170,.18);text-align:left}
+.row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+nav{display:flex;justify-content:space-between;gap:10px}
+.env{width:min(260px,70vw);margin:0 auto;position:relative;animation:float 4s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-8px)}}
+.env .flap{transform-origin:top;transition:transform .7s}.env.open .flap{transform:scaleY(-1)}
+.fc{cursor:pointer;width:100%;text-align:left;border-radius:16px;background:var(--card);color:var(--ink);padding:14px 16px;border:1.5px solid var(--lav)}
+.fc p{margin:.5rem 0 0;color:var(--soft);font-size:.95rem}
+.chip{background:var(--card);color:var(--ink);border:1.5px solid var(--pink)}
+.slot{min-height:64px;border:2px dashed var(--lav);border-radius:14px;padding:10px;font-family:Georgia,serif;font-size:1.15rem}
+.shake{animation:sh .35s}@keyframes sh{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.poem p,.letter p{opacity:0;animation:in .8s ease forwards}.noanim .poem p,.noanim .letter p,.noanim .scene{animation:none;opacity:1}
+.poem{font-size:1.15rem}.poem p{margin:.35rem 0}
+.letter{text-align:left}.letter p{margin:.6rem 0}
+.petal{position:fixed;top:-20px;font-size:18px;opacity:.7;animation:fall linear infinite;pointer-events:none;z-index:0}
+@keyframes fall{to{transform:translateY(110vh) rotate(360deg)}}
+.noanim .petal,.noanim .env{display:none}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01s!important;transition-duration:.01s!important}.petal{display:none}}
+.fb{margin-top:10px;color:var(--soft)}
+</style>
+</head>
+<body>
+<div id="app">
+<header><span id="pos" aria-live="polite"></span><span class="row"><button class="ghost" id="mus" aria-pressed="false" style="padding:6px 12px;min-height:34px;font-size:.8rem">🔈 Musik: mati</button><button class="ghost" id="anim" style="padding:6px 12px;min-height:34px;font-size:.8rem">Lewati animasi</button><button class="ghost" id="restart" style="padding:6px 12px;min-height:34px;font-size:.8rem">Ulangi cerita</button></span></header>
+<div class="bar" role="progressbar" aria-label="Kemajuan cerita"><i id="fill"></i></div>
+<main id="main"><noscript>Halaman ini membutuhkan JavaScript untuk ditampilkan.</noscript></main>
+<nav id="nav"></nav>
+</div>
+<script>
+(function(){
+var $=function(s){return document.querySelector(s)},main=$("#main"),nav=$("#nav");
+var RM=matchMedia("(prefers-color-scheme: x)")&&matchMedia("(prefers-reduced-motion: reduce)").matches;
+var noanim=RM,i=0,done={},ans=null;
+try{i=+sessionStorage.getItem("ala_i")||0}catch(e){}
+function save(){try{sessionStorage.setItem("ala_i",i)}catch(e){}}
+function ps(arr,step,start){return arr.map(function(t,k){return '<p style="animation-delay:'+(noanim?0:start+k*step)+'s">'+t+'</p>'}).join("")}
+function petals(){if(document.querySelector(".petal"))return;for(var k=0;k<9;k++){var p=document.createElement("span");p.className="petal";p.textContent=["🌸","🌷","✨"][k%3];p.style.left=(k*11+3)+"%";p.style.animationDuration=(12+k*2)+"s";p.style.animationDelay=(-k*2)+"s";p.setAttribute("aria-hidden","true");document.body.appendChild(p)}}
+petals();
+var TOTAL=16;
+var mus={ctx:null,on:false,t:null,gain:null,el:null,playing:false},CH=[[261.6,329.6,392],[220,261.6,329.6],[174.6,220,261.6],[196,246.9,293.7]],ci=0;
+function note(f,t,d){var o=mus.ctx.createOscillator(),g=mus.ctx.createGain();o.type="sine";o.frequency.value=f;g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.12,t+.5);g.gain.exponentialRampToValueAtTime(.001,t+d);o.connect(g);g.connect(mus.gain);o.start(t);o.stop(t+d+.1)}
+function bar(){if(!mus.on)return;var t=mus.ctx.currentTime+.05,c=CH[ci++%4];c.forEach(function(f,k){note(f,t+k*.9,5)});note(c[2]*2,t+3.2,3);mus.t=setTimeout(bar,3600)}
+function setMusic(on){var b=$("#mus");try{if(on){if(mus.el){mus.el.play()}else{if(!mus.ctx){var AC=window.AudioContext||window.webkitAudioContext;mus.ctx=new AC();mus.gain=mus.ctx.createGain();mus.gain.gain.value=.8;mus.gain.connect(mus.ctx.destination)}mus.ctx.resume();mus.on=true;bar()}}else{mus.on=false;clearTimeout(mus.t);if(mus.el)mus.el.pause();else if(mus.ctx)mus.ctx.suspend()}mus.playing=on;b.textContent=on?"🔊 Musik: nyala":"🔈 Musik: mati";b.setAttribute("aria-pressed",on)}catch(e){b.textContent="Musik tidak tersedia"}}
+var scenes=[
+{own:1,html:function(){return '<div class="env" id="env" aria-hidden="true"><svg viewBox="0 0 200 140"><rect x="10" y="30" width="180" height="100" rx="10" fill="#fff4e6" stroke="#f4a6c0" stroke-width="3"/><path class="flap" d="M10 34 L100 90 L190 34 Z" fill="#fbd3e1" stroke="#f4a6c0" stroke-width="3"/><circle cx="100" cy="88" r="15" fill="#e0709a"/><text x="100" y="94" font-size="16" text-anchor="middle" fill="#fff">♥</text></svg></div><h1>Ada sesuatu yang ingin kusampaikan, sebelum jarak ini semakin jauh.</h1><div><button id="open">Buka suratnya</button></div>'},
+ init:function(){$("#open").onclick=function(){$("#env").classList.add("open");setTimeout(function(){go(1)},noanim?0:750)}}},
+{html:function(){return '<h2>Saat semuanya berubah</h2><div class="poem">'+ps(["Kadang kita baru sadar hujan sudah turun,","setelah melihat seseorang mulai berteduh.","Aku terlambat menyadari bahwa kenyamananmu perlahan berubah,","dan itu karena caraku, bukan karena kamu."],1,.3)+'</div>'}},
+{html:function(){return '<h2>Tentang ruang</h2><svg viewBox="0 0 300 90" width="280" role="img" aria-label="Dua bunga dengan jarak yang bisa diatur"><circle id="a" cx="90" cy="45" r="14" fill="#f4a6c0"/><circle id="b" cx="210" cy="45" r="14" fill="#c9b6ee"/></svg><label for="rg">Geser untuk mengatur jarak</label><input id="rg" type="range" min="0" max="100" value="60" style="width:100%"><p class="fb" id="rt" aria-live="polite"></p>'},
+ init:function(){var r=$("#rg");function u(){var v=+r.value;$("#a").setAttribute("cx",140-v*0.6);$("#b").setAttribute("cx",160+v*0.6);$("#rt").textContent=v<30?"Terlalu dekat bisa terasa sesak, meski niatnya baik.":v<70?"Jarak yang nyaman berbeda-beda untuk setiap orang, dan hanya kamu yang tahu ukurannya.":"Jarak yang lebar pun tidak apa-apa. Dari sana pun, kepedulian tetap bisa terasa."}r.oninput=u;u()}},
+{html:function(){return '<h2>Hal-hal yang kusesali</h2><p style="color:var(--soft);margin:0">Ketuk kartu untuk membukanya.</p>'+[["Terlalu memaksa","Seharusnya aku memberi ruang. Itu salahku, bukan salahmu."],["Kurang peka","Aku tidak cukup memperhatikan hal-hal yang membuatmu tidak nyaman. Aku bertanggung jawab atas itu."],["Mengikuti keinginanku sendiri","Aku kurang mempertimbangkan perasaanmu. Tidak ada alasan yang membenarkannya."],["Membuat jarak","Sikapku membuat semuanya jadi canggung dan jauh. Aku menyesalinya."]].map(function(c){return '<button class="fc" aria-expanded="false"><strong>'+c[0]+' ▾</strong><p hidden>'+c[1]+'</p></button>'}).join("")},
+ init:function(){main.querySelectorAll(".fc").forEach(function(b){b.onclick=function(){var p=b.querySelector("p");p.hidden=!p.hidden;b.setAttribute("aria-expanded",!p.hidden)}})}},
+{gate:"puz",html:function(){return '<h2>Menyusun kembali sebuah pesan</h2><p style="margin:0;color:var(--soft)">Ketuk kata-kata sesuai urutan agar menjadi kalimat yang benar.</p><div class="slot" id="slot" aria-live="polite"></div><div class="row" id="chips"></div><div id="msg" class="fb" aria-live="polite">0 dari 6 kata</div><div class="row"><button class="ghost" id="reset">Susun ulang</button><button class="ghost" id="skip">Lewati game</button></div>'},
+ init:function(){var W=["Setiap","perubahan","bisa","dimulai","dari","kesadaran"],order=[3,0,5,2,4,1],n=0,slot=$("#slot"),box=$("#chips");
+  function draw(){slot.textContent=W.slice(0,n).join(" ");$("#msg").textContent=n+" dari 6 kata";box.innerHTML="";order.forEach(function(w){if(w>=n){var b=document.createElement("button");b.className="chip";b.textContent=W[w];b.onclick=function(){if(w===n){n++;draw();if(n===6)win()}else{b.classList.remove("shake");void b.offsetWidth;b.classList.add("shake");$("#msg").textContent="Belum pas, coba kata lain."}};box.appendChild(b)}})}
+  function win(){done.puz=1;$("#msg").innerHTML="Selesai. <em>Tidak semua yang retak bisa langsung kembali utuh, tetapi setiap perubahan bisa dimulai dari kesadaran.</em> Menyelesaikan game ini tidak berarti kamu harus memaafkan.";upd()}
+  $("#reset").onclick=function(){n=0;draw()};$("#skip").onclick=function(){done.puz=1;upd();go(1)};if(done.puz){n=6;draw();win()}else draw()}},
+{html:function(){return '<h2>Sebuah puisi kecil</h2><div class="poem">'+ps(["Aku melihat jarak tumbuh di antara kita,","seperti hujan yang pelan menghapus jejak.","Dulu kupikir dekat berarti terus mengetuk,","padahal pintu pun butuh waktu untuk terbuka.","Maaf untuk langkah yang terlalu cepat,","untuk suara yang tak mau mendengar.","Kini kubiarkan ruang itu tetap ada,","dan belajar menjaga dari kejauhan yang hangat.","Jika nanti angin membawamu kembali, itu hakmu.","Jika tidak, semoga kamu tenang di mana pun kamu berada."],1.4,.3)+'</div>'}},
+{gate:"ch",html:function(){return '<h2>Pilih cara yang lebih lembut</h2><div id="q"></div><div class="fb" id="fb" aria-live="polite"></div><div class="row"><button class="ghost" id="skip">Lewati game</button></div>'},
+ init:function(){var Q=[["Ketika seseorang belum membalas pesan, apa yang sebaiknya dilakukan?",["Mengirim pesan terus-menerus sampai dijawab.","Memberi waktu dan ruang, lalu menghormati responsnya.","Membuatnya merasa bersalah karena tidak membalas."],1,"Memberi waktu menunjukkan bahwa kita menghargai ritme orang lain."],["Seseorang bilang ia butuh waktu sendiri. Apa yang sebaiknya dilakukan?",["Terus datang agar ia tahu aku peduli.","Menerima, memberi jarak, dan tidak mengejar jawaban.","Bertanya berulang kali apakah ia marah."],1,"Menerima permintaan itu tanpa menuntut penjelasan adalah bentuk peduli."],["Seseorang menolak dengan halus. Apa yang sebaiknya dilakukan?",["Menganggap itu hanya basa-basi dan mencoba lagi.","Meminta alasan sampai ia mau menjelaskan.","Menghormati penolakan itu dengan tenang."],2,"Penolakan, sekecil apa pun, layak dihormati apa adanya."]],k=0,q=$("#q"),fb=$("#fb");
+  function show(){if(k>=Q.length){q.innerHTML="";fb.innerHTML="Perubahan nyata ditunjukkan lewat tindakan, bukan skor game.";done.ch=1;upd();return}var c=Q[k];q.innerHTML='<p><strong>'+c[0]+'</strong></p>'+c[1].map(function(o,j){return '<button class="fc" data-j="'+j+'">'+"ABC"[j]+". "+o+'</button>'}).join("");fb.textContent="";q.querySelectorAll(".fc").forEach(function(b){b.onclick=function(){var j=+b.dataset.j;fb.innerHTML=(j===c[2]?"Tepat. ":"Mungkin bisa lebih lembut. ")+c[3]+' <button id="nx" style="margin-top:8px">'+(k<2?"Lanjut":"Selesai")+'</button>';$("#nx").onclick=function(){k++;show()}}})}
+  $("#skip").onclick=function(){done.ch=1;upd();go(1)};if(done.ch)k=Q.length;show()}},
+{html:function(){return '<h2>Permintaan maafku</h2><div class="card letter">'+ps(["Kepada kamu,","Aku minta maaf karena sudah membuatmu risih, ilfil, dan tidak nyaman. Aku terlalu memaksa dan kurang peka pada batasan serta hal-hal yang tidak kamu suka. Itu kesalahanku.","Aku sadar sikapku mungkin membuat hubungan kita menjadi jauh dan canggung. Aku tidak akan membuat alasan untuk itu.","Aku berjanji akan lebih banyak mendengarkan, menghormati batasan, dan tidak mengulangi kesalahan yang sama.","Kamu tidak berkewajiban memaafkan, ataupun kembali dekat. Permintaan maaf ini bukan tuntutan."],1.6,.3)+'</div>'}},
+{html:function(){return '<h2>Janji-janji kecilku</h2><p style="margin:0;color:var(--soft)">Bukan untuk ditagih, hanya pengingat untukku sendiri.</p>'+["Mendengarkan lebih dulu sebelum berbicara.","Menerima kata “tidak” tanpa bertanya berulang.","Memberi ruang saat kamu butuh waktu.","Memeriksa perasaanku sendiri, bukan menuntut perasaanmu."].map(function(t){return '<button class="fc" role="checkbox" aria-checked="false">☐ '+t+'</button>'}).join("")},
+ init:function(){main.querySelectorAll(".fc").forEach(function(b){b.onclick=function(){var c=b.getAttribute("aria-checked")!=="true";b.setAttribute("aria-checked",c);b.textContent=(c?"☑ ":"☐ ")+b.textContent.slice(2)}})}},
+{html:function(){return '<h2>Janji yang jujur</h2><p style="margin:0;color:var(--soft)">Janji mudah diucapkan, jadi kamu tidak perlu mempercayainya sekarang. Anggap ini catatan untuk menagihku lewat tindakan, bukan kata-kata.</p><div class="card"><strong>Yang akan kulakukan</strong><ul><li>Berhenti ketika kamu bilang berhenti.</li><li>Bertanya, bukan menebak, soal apa yang membuatmu nyaman.</li><li>Membiarkan pesan tanpa balasan tetap tanpa tagihan.</li><li>Mengakui kalau aku salah lagi, tanpa membela diri.</li></ul></div><div class="card"><strong>Yang tidak akan kulakukan</strong><ul><li>Mengejar jawaban atau menuntut penjelasan.</li><li>Menghubungimu lewat orang lain.</li><li>Membuatmu merasa bersalah.</li><li>Mengungkit hal ini lagi kalau kamu tidak yang memulai.</li></ul></div>'}},
+{html:function(){return '<h2>Kepercayaan itu pelan</h2><div class="poem">'+ps(["Kepercayaan tidak kembali lewat kata-kata yang indah, apalagi lewat sebuah website.","Ia kembali lewat hal-hal kecil yang konsisten, dalam waktu yang kamu tentukan.","Aku tidak memasang tenggat. Kamu tidak perlu menilai, menjawab, atau menjelaskan apa pun.","Kalau suatu hari aku lalai, kamu berhak menegurku, dan aku akan mendengarkan."],1.3,.3)+'</div>'}},
+{html:function(){return '<h2>Kedekatan yang sehat</h2><p style="margin:0;color:var(--soft)">Ketuk untuk membuka.</p>'+[["Boleh bilang tidak","Tidak harus disertai alasan, dan tidak akan kuanggap sebagai penolakan terhadap dirimu."],["Boleh diam","Diam bukan kesalahan. Aku belajar tidak mengisinya dengan kecemasanku."],["Boleh pergi kapan saja","Kedekatan yang baik tidak mengikat. Pintunya tetap bisa kamu tutup kapan pun."]].map(function(c){return '<button class="fc" aria-expanded="false"><strong>'+c[0]+' ▾</strong><p hidden>'+c[1]+'</p></button>'}).join("")},
+ init:function(){main.querySelectorAll(".fc").forEach(function(b){b.onclick=function(){var p=b.querySelector("p");p.hidden=!p.hidden;b.setAttribute("aria-expanded",!p.hidden)}})}},
+{html:function(){return '<svg viewBox="0 0 300 150" width="280" role="img" aria-label="Dua bunga tumbuh berjauhan di bawah langit yang sama"><circle cx="150" cy="40" r="4" fill="#f4a6c0"/><circle cx="70" cy="30" r="3" fill="#c9b6ee"/><circle cx="230" cy="26" r="3" fill="#c9b6ee"/><path d="M70 140V85M230 140V85" stroke="#7bb48a" stroke-width="4"/><circle cx="70" cy="78" r="14" fill="#f4a6c0"/><circle cx="230" cy="78" r="14" fill="#c9b6ee"/><circle cx="70" cy="78" r="5" fill="#fff4b0"/><circle cx="230" cy="78" r="5" fill="#fff4b0"/></svg><p class="quote" style="font-size:1.15rem">Kalau kedekatan pernah membuatmu lelah, kali ini aku ingin belajar bahwa peduli juga berarti tahu kapan harus memberi ruang.</p><div class="fb">Baca pelan-pelan saja.</div>'},wait:1},
+{html:function(){return '<h2>Terima kasih</h2><div class="poem">'+ps(["Terima kasih sudah membaca sampai sini.","Itu sudah lebih dari cukup, apa pun yang kamu rasakan.","Pertanyaan setelah ini boleh dijawab dengan jujur, dan kamu boleh menutup halaman ini kapan saja."],1.3,.3)+'</div>'}},
+{html:function(){return '<h2>Harapan untukmu</h2><p style="margin:0;color:var(--soft)">Ketuk bintang-bintang kecil ini.</p><div class="row" id="st"></div><div class="card" id="wish" aria-live="polite" style="min-height:70px">✨</div>'},
+ init:function(){var W=["Semoga harimu selalu terasa ringan.","Semoga kamu dikelilingi orang-orang yang membuatmu nyaman.","Semoga kamu selalu didengar dan dihargai.","Semoga tenang menemani langkahmu, apa pun pilihanmu."],s=$("#st");W.forEach(function(w,k){var b=document.createElement("button");b.className="chip";b.textContent="⭐";b.setAttribute("aria-label","Bintang harapan "+(k+1));b.onclick=function(){$("#wish").textContent=w};s.appendChild(b)})}},
+{own:1,html:function(){return '<h1>Bolehkah kita mencoba dekat seperti dulu lagi?</h1><div class="card"><p style="margin:0 0 .6rem">Aku merindukan percakapan yang terasa nyaman, candaan sederhana, dan kedekatan yang tidak harus dipaksakan. Kalau kamu juga menginginkannya, aku ingin mencoba membangun kembali semuanya pelan-pelan. Bukan untuk berpura-pura bahwa tidak pernah ada yang salah, tetapi untuk belajar agar kesalahan yang sama tidak terulang.</p><p style="margin:0">Namun, aku ingin kamu memilih dengan jujur. Aku akan menghargai jawabanmu, apa pun itu.</p></div><div class="row"><button id="yes">Aku mau, kita coba pelan-pelan lagi 🤍</button><button id="no">Maaf, aku belum mau 🌿</button></div><div><button class="ghost" id="back">Kembali</button></div>'},
+ init:function(){$("#yes").onclick=function(){ans="yes";go(1)};$("#no").onclick=function(){ans="no";go(1)};$("#back").onclick=function(){go(-1)}}},
+{own:1,html:function(){return ans==="yes"?'<h1>Terima kasih 🌸💗</h1><p>Terima kasih sudah bersedia memberi kesempatan. Kedekatan tidak harus langsung kembali seperti dulu. Kita bisa membangunnya perlahan, sesuai nyamanmu. Jawaban ini bukan janji untuk hal lain, dan kamu bebas mengubah ritmenya kapan pun.</p>':'<h1>Terima kasih sudah jujur 🌿</h1><p>Terima kasih sudah jujur. Aku menghargai keputusanmu dan tidak akan memaksamu. Maaf atas hal-hal yang membuatmu tidak nyaman. Semoga kamu menemukan ketenangan dan kebahagiaan, ya.</p><div><button class="ghost" id="rd">Kembali membaca cerita</button></div>'},
+ init:function(){var r=$("#rd");if(r)r.onclick=function(){i=0;go(0)}}}
+];
+function upd(){var s=scenes[i],n=$("#next");if(n)n.disabled=!!(s.gate&&!done[s.gate]);}
+function go(d){i=Math.max(0,Math.min(scenes.length-1,i+d));save();render()}
+var timer;
+function render(){clearTimeout(timer);var s=scenes[i];document.body.classList.toggle("noanim",noanim);document.documentElement.style.setProperty("--t",noanim?"0s":".5s");
+ main.innerHTML='<div class="scene" style="display:flex;flex-direction:column;gap:16px">'+s.html()+'</div>';
+ $("#pos").textContent=i<TOTAL?"Cerita "+(i+1)+" dari "+TOTAL:"Selesai";$("#fill").style.width=Math.min(100,(i+1)/TOTAL*100)+"%";
+ nav.innerHTML=s.own?"":'<button class="ghost" id="prev"'+(i===0?" disabled":"")+'>Kembali</button><button id="next">'+(i===0?"Mulai":"Lanjutkan ceritanya")+'</button>';
+ if(!s.own){$("#prev").onclick=function(){go(-1)};$("#next").onclick=function(){go(1)}}
+ if(s.init)s.init();
+ if(s.wait){var n=$("#next");n.style.visibility="hidden";timer=setTimeout(function(){n.style.visibility="visible"},noanim?0:7000)}
+ upd();window.scrollTo(0,0);var h=main.querySelector("h1,h2");if(h){h.tabIndex=-1;h.focus({preventScroll:true})}}
+$("#anim").onclick=function(){noanim=!noanim;this.textContent=noanim?"Nyalakan animasi":"Lewati animasi";render()};
+$("#mus").onclick=function(){setMusic(!mus.playing)};
+$("#restart").onclick=function(){i=0;done={};ans=null;save();render()};
+if(i>=16&&!ans)i=15;
+try{render()}catch(e){main.textContent="Maaf, terjadi kesalahan. Muat ulang halaman ya."}
+})();
+</script>
+</body>
+</html>
